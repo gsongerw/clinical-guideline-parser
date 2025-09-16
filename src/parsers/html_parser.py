@@ -75,12 +75,14 @@ def _extract_sections(soup: BeautifulSoup) -> List[GuidelineSection]:
     headers = soup.find_all(["h1", "h2", "h3", "h4"]) if soup else []
 
     for h in headers:
+        if not isinstance(h, Tag):
+            continue
         heading = h.get_text(" ", strip=True)
         level = _level_from_tag(h.name)
         texts: List[str] = []
         # Gather following siblings until next header of same or higher level
         for sib in h.next_siblings:
-            if getattr(sib, "name", None) in ["h1", "h2", "h3", "h4"]:
+            if isinstance(sib, Tag) and sib.name in ["h1", "h2", "h3", "h4"]:
                 break
             txt = (
                 sib.get_text("\n", strip=True)
