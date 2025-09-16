@@ -1,0 +1,160 @@
+# How to Run the Clinical Guideline Parser - Beginner's Guide
+
+## What This Program Does
+This program takes medical guideline documents (PDFs or HTML files) and:
+1. Extracts the text, headings, and important information
+2. Organizes it into a structured format
+3. Lets you search through the content to find specific information
+
+Think of it like a smart filing system that can read medical documents and help you find specific information quickly.
+
+## Step-by-Step Instructions
+
+### Step 1: Open Terminal/Command Line
+- On Mac: Press Cmd + Space, type "Terminal", press Enter
+- On Windows: Press Windows + R, type "cmd", press Enter
+- On Linux: Press Ctrl + Alt + T
+
+### Step 2: Navigate to Your Project Folder
+Type this command (replace with your actual folder path):
+```
+cd /Users/gsongerw/personalProj
+```
+
+### Step 3: Create a Virtual Environment (Isolated Python Environment)
+This keeps your project's dependencies separate from other Python projects:
+```
+python3 -m venv .venv
+```
+
+### Step 4: Activate the Virtual Environment
+```
+source .venv/bin/activate
+```
+You should see (.venv) appear at the beginning of your command line.
+
+### Step 5: Install Required Packages
+```
+pip install -r requirements.txt
+```
+This downloads all the code libraries needed to run the program.
+
+### Step 6: Create a Test Folder and Add a PDF
+Create a folder for your test files:
+```
+mkdir test_guidelines
+```
+
+Now you need to add a PDF file to this folder. You can:
+- Download a medical guideline PDF from a website (like AHA, ACC, etc.)
+- Or use any PDF you have on your computer
+- Copy the PDF file into the test_guidelines folder
+
+### Step 7: Run the Program to Parse Your PDF
+```
+python -m src.cli.ingest --input test_guidelines --output results --format jsonl --source "Test Source"
+```
+
+This command:
+- Looks in the "test_guidelines" folder for PDF/HTML files
+- Processes them and extracts information
+- Saves the results in a "results" folder
+
+### Step 8: Search Through Your Parsed Content
+```
+python -m src.cli.search --jsonl results/guidelines.jsonl --query "your search terms here" --k 5
+```
+
+Replace "your search terms here" with what you want to find. For example:
+- "heart failure treatment"
+- "blood pressure medication"
+- "diabetes management"
+
+### Step 9: View the Results
+The program will show you:
+- The most relevant sections from your PDF
+- Where each piece of information came from
+- A score showing how relevant it is
+- A snippet of the text
+
+## What Each Part Does (Simple Explanation)
+
+### The Parser (src/parsers/)
+- **PDF Parser**: Reads PDF files and extracts text, headings, dates
+- **HTML Parser**: Does the same thing for web pages
+
+### The Models (src/guidelines/models.py)
+- Defines the structure of how information is organized
+- Like a template for how to store medical guideline information
+
+### The Search (src/search/)
+- Creates an index of all the text (like a book's index)
+- When you search, it finds the most relevant parts quickly
+
+### The CLI (src/cli/)
+- Command Line Interface - this is how you talk to the program
+- Two main commands: ingest (process files) and search (find information)
+
+## Example with Real Commands
+
+Let's say you have a PDF called "heart_guidelines.pdf" in your test_guidelines folder:
+
+1. Process the PDF:
+```
+python -m src.cli.ingest --input test_guidelines --output results --format jsonl --source "Heart Guidelines"
+```
+
+2. Search for information about medications:
+```
+python -m src.cli.search --jsonl results/guidelines.jsonl --query "ACE inhibitors" --k 3
+```
+
+3. Search for something else:
+```
+python -m src.cli.search --jsonl results/guidelines.jsonl --query "exercise recommendations" --k 5
+```
+
+## Troubleshooting
+
+### If you get "command not found" errors:
+- Make sure you're in the right folder
+- Make sure the virtual environment is activated (you should see (.venv) in your prompt)
+
+### If you get "file not found" errors:
+- Check that your PDF is actually in the test_guidelines folder
+- Make sure the file path is correct
+
+### If the search returns empty results:
+- The PDF might not contain your search terms
+- Try different search terms
+- Check that the PDF was processed successfully (look for the results/guidelines.jsonl file)
+
+## What You Should See
+
+When everything works, you'll get JSON output that looks like this:
+```json
+{
+  "results": [
+    {
+      "score": 0.85,
+      "doc_id": "your-pdf-name",
+      "title": "Medical Guideline Title",
+      "source": "Test Source",
+      "section_heading": "Treatment Recommendations",
+      "snippet": "The relevant text from your PDF will appear here..."
+    }
+  ]
+}
+```
+
+The "score" tells you how relevant the result is (higher = more relevant).
+The "snippet" shows you the actual text from your PDF that matches your search.
+
+## Next Steps
+Once you get this working, you can:
+- Try different PDFs
+- Experiment with different search terms
+- Look at the results/guidelines.jsonl file to see all the structured data
+- Use this as a foundation for building more advanced medical AI tools
+
+Remember: This is a prototype for learning and development. Always verify medical information with official sources!
