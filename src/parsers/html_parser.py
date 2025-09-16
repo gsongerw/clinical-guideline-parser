@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from typing import List, Optional
+
 from bs4 import BeautifulSoup
 
-from src.guidelines.models import GuidelineDocument, GuidelineSection, Evidence
+from src.guidelines.models import Evidence, GuidelineDocument, GuidelineSection
 from src.utils.dates import parse_date
 from src.utils.evidence import extract_evidence
 

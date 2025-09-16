@@ -8,8 +8,8 @@ from typing import Iterable, Optional
 
 from rich.progress import track
 
-from src.parsers.pdf_parser import parse_pdf
 from src.parsers.html_parser import parse_html
+from src.parsers.pdf_parser import parse_pdf
 
 
 def find_files(input_dir: str) -> Iterable[Path]:

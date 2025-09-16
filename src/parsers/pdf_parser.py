@@ -5,10 +5,9 @@ from typing import List, Optional
 
 import fitz  # PyMuPDF
 
-from src.guidelines.models import GuidelineDocument, GuidelineSection, Evidence
+from src.guidelines.models import Evidence, GuidelineDocument, GuidelineSection
 from src.utils.dates import parse_date
 from src.utils.evidence import extract_evidence
-
 
 HEADING_LINE = re.compile(r"^(\d+\.|[A-Z][A-Z\s\-/]{3,}|[IVX]+\.)\s+.*")
 DATE_CANDIDATE = re.compile(
