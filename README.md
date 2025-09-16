@@ -165,7 +165,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/clinical-guideline-parser/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/clinical-guideline-parser/discussions)
-- **Email**: your.email@example.com
+- **Email**: gsongerw@gmail.com
 
 ## 🙏 Acknowledgments
 
