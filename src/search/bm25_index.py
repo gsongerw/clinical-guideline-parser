@@ -41,7 +41,9 @@ class BM25SectionIndex:
             return []
         tokens = tokenize(query)
         scores = self.bm25.get_scores(tokens)
-        ranked = sorted(zip(self.sections, scores), key=lambda x: x[1], reverse=True)[:k]
+        ranked = sorted(zip(self.sections, scores), key=lambda x: x[1], reverse=True)[
+            :k
+        ]
         results: List[Dict[str, Any]] = []
         for ref, score in ranked:
             results.append(

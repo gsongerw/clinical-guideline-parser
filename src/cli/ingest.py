@@ -31,10 +31,16 @@ def parse_file(path: Path, source: Optional[str] = None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Ingest clinical guidelines into structured JSONL")
-    parser.add_argument("--input", required=True, help="Input directory containing guideline files")
+    parser = argparse.ArgumentParser(
+        description="Ingest clinical guidelines into structured JSONL"
+    )
+    parser.add_argument(
+        "--input", required=True, help="Input directory containing guideline files"
+    )
     parser.add_argument("--output", required=True, help="Output directory for JSONL")
-    parser.add_argument("--format", default="jsonl", choices=["jsonl"], help="Output format")
+    parser.add_argument(
+        "--format", default="jsonl", choices=["jsonl"], help="Output format"
+    )
     parser.add_argument("--source", default=None, help="Source label, e.g., AHA/ACC")
 
     args = parser.parse_args()

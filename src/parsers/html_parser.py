@@ -45,14 +45,22 @@ def _get_dates(soup: BeautifulSoup) -> tuple[Optional[str], Optional[str]]:
     pub = None
     updated = None
     for tag in soup.find_all(["time", "meta", "span", "p"]):
-        text = tag.get("datetime") or tag.get("content") or tag.get_text(" ", strip=True)
+        text = (
+            tag.get("datetime") or tag.get("content") or tag.get_text(" ", strip=True)
+        )
         if not text:
             continue
         d = parse_date(text)
         if d:
-            if tag.name == "time" and tag.get("itemprop") in {"datePublished", "dateCreated"}:
+            if tag.name == "time" and tag.get("itemprop") in {
+                "datePublished",
+                "dateCreated",
+            }:
                 pub = pub or d
-            elif tag.name == "time" and tag.get("itemprop") in {"dateModified", "dateUpdated"}:
+            elif tag.name == "time" and tag.get("itemprop") in {
+                "dateModified",
+                "dateUpdated",
+            }:
                 updated = updated or d
             else:
                 pub = pub or d
@@ -71,7 +79,11 @@ def _extract_sections(soup: BeautifulSoup) -> List[GuidelineSection]:
         for sib in h.next_siblings:
             if getattr(sib, "name", None) in ["h1", "h2", "h3", "h4"]:
                 break
-            txt = sib.get_text("\n", strip=True) if hasattr(sib, "get_text") else str(sib).strip()
+            txt = (
+                sib.get_text("\n", strip=True)
+                if hasattr(sib, "get_text")
+                else str(sib).strip()
+            )
             if txt:
                 texts.append(txt)
         body = "\n".join(texts).strip()

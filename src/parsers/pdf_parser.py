@@ -11,8 +11,13 @@ from src.utils.evidence import extract_evidence
 
 
 HEADING_LINE = re.compile(r"^(\d+\.|[A-Z][A-Z\s\-/]{3,}|[IVX]+\.)\s+.*")
-DATE_CANDIDATE = re.compile(r"(Published|Publication|Updated|Last\s+updated|Revision)[:\s]+(.{4,60})", re.IGNORECASE)
-TITLE_CANDIDATE = re.compile(r"^(.*Guideline.*|.*Statement.*|.*Recommendation.*)$", re.IGNORECASE)
+DATE_CANDIDATE = re.compile(
+    r"(Published|Publication|Updated|Last\s+updated|Revision)[:\s]+(.{4,60})",
+    re.IGNORECASE,
+)
+TITLE_CANDIDATE = re.compile(
+    r"^(.*Guideline.*|.*Statement.*|.*Recommendation.*)$", re.IGNORECASE
+)
 
 
 def parse_pdf(path: str, source: Optional[str] = None) -> GuidelineDocument:
@@ -103,7 +108,7 @@ def _split_into_sections(lines: List[str]) -> List[GuidelineSection]:
         else:
             if current is None:
                 current = GuidelineSection(heading=None, level=1, text="")
-            current.text += (s + "\n")
+            current.text += s + "\n"
 
     flush()
 

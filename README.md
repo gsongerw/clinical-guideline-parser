@@ -3,7 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Tests](https://github.com/yourusername/clinical-guideline-parser/workflows/Tests/badge.svg)](https://github.com/yourusername/clinical-guideline-parser/actions)
+[![Tests](https://github.com/gsongerw/clinical-guideline-parser/workflows/Tests/badge.svg)](https://github.com/gsongerw/clinical-guideline-parser/actions)
 
 > **Transform medical guidelines into searchable, structured data for AI-powered clinical decision support**
 
@@ -30,14 +30,14 @@ A focused pipeline to parse medical guidelines (PDF/HTML) into structured JSON f
 
 ### From Source
 ```bash
-git clone https://github.com/yourusername/clinical-guideline-parser.git
+git clone https://github.com/gsongerw/clinical-guideline-parser.git
 cd clinical-guideline-parser
 pip install -e .
 ```
 
 ### Development Installation
 ```bash
-git clone https://github.com/yourusername/clinical-guideline-parser.git
+git clone https://github.com/gsongerw/clinical-guideline-parser.git
 cd clinical-guideline-parser
 pip install -e .[dev]
 ```
@@ -163,8 +163,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/clinical-guideline-parser/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/clinical-guideline-parser/discussions)
+- **Issues**: [GitHub Issues](https://github.com/gsongerw/clinical-guideline-parser/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/gsongerw/clinical-guideline-parser/discussions)
 - **Email**: gsongerw@gmail.com
 
 ## 🙏 Acknowledgments
