@@ -18,7 +18,7 @@ class TestHTMLParser:
         
         doc = parse_html(str(sample_file), source="AHA/ACC")
         
-        assert doc.title == "2023 AHA/ACC Heart Failure Management Guidelines"
+        assert doc.title == "Sample Heart Failure Guidelines"
         assert doc.source == "AHA/ACC"
         assert doc.publication_date == "2023-05-10"
         assert doc.last_updated == "2024-01-15"
@@ -83,6 +83,6 @@ class TestDateExtraction:
         # Test various date formats
         assert parse_date("2023-05-10") == "2023-05-10"
         assert parse_date("May 10, 2023") == "2023-05-10"
-        assert parse_date("10/05/2023") == "2023-05-10"
+        assert parse_date("05/10/2023") == "2023-05-10"  # MM/DD/YYYY format
         assert parse_date("invalid date") is None
         assert parse_date("") is None

@@ -65,6 +65,10 @@ def _get_dates(soup: BeautifulSoup) -> tuple[Optional[str], Optional[str]]:
                 "dateUpdated",
             }:
                 updated = updated or d
+            elif tag.name == "meta" and tag.get("name") == "publication-date":
+                pub = pub or d
+            elif tag.name == "meta" and tag.get("name") == "last-updated":
+                updated = updated or d
             else:
                 pub = pub or d
     return pub, updated

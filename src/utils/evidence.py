@@ -15,11 +15,11 @@ def extract_evidence(text: str) -> Tuple[Optional[str], Optional[str], Optional[
 
     cls_m = CLASS_PATTERN.search(text)
     if cls_m:
-        cls = cls_m.group(1).upper()
+        cls = cls_m.group(1)  # Keep original case for Roman numerals
 
     lvl_m = LEVEL_PATTERN.search(text)
     if lvl_m:
-        lvl = lvl_m.group(2).upper()
+        lvl = lvl_m.group(2).upper()  # Uppercase for A, B, C
 
     # Canonical grade preference: Level first if present, else Class
     canonical = lvl or cls
