@@ -89,7 +89,7 @@ def _split_into_sections(lines: List[str]) -> List[GuidelineSection]:
     sections: List[GuidelineSection] = []
     current: Optional[GuidelineSection] = None
 
-    def flush():
+    def flush() -> None:
         nonlocal current
         if current is not None:
             current.text = current.text.strip()

@@ -7,7 +7,7 @@ from pathlib import Path
 from src.search.bm25_index import BM25SectionIndex
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Search guideline JSONL with BM25")
     parser.add_argument("--jsonl", required=True, help="Path to guidelines.jsonl")
     parser.add_argument("--query", required=True, help="Search query text")

@@ -4,7 +4,7 @@ import argparse
 import json
 import os
 from pathlib import Path
-from typing import Iterable, Optional
+from typing import Any, Iterable, Optional
 
 from rich.progress import track
 
@@ -20,7 +20,7 @@ def find_files(input_dir: str) -> Iterable[Path]:
                 yield f
 
 
-def parse_file(path: Path, source: Optional[str] = None):
+def parse_file(path: Path, source: Optional[str] = None) -> Any:
     suffix = path.suffix.lower()
     if suffix == ".pdf":
         return parse_pdf(str(path), source=source)
@@ -30,7 +30,7 @@ def parse_file(path: Path, source: Optional[str] = None):
         raise ValueError(f"Unsupported file type: {suffix}")
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Ingest clinical guidelines into structured JSONL"
     )

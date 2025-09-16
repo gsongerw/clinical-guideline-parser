@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Any, List, Optional, Union
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, PageElement, Tag
 
 from src.guidelines.models import Evidence, GuidelineDocument, GuidelineSection
 from src.utils.dates import parse_date
@@ -35,10 +35,10 @@ def parse_html(path: str, source: Optional[str] = None) -> GuidelineDocument:
 
 def _get_title(soup: BeautifulSoup) -> Optional[str]:
     if soup.title and soup.title.string:
-        return soup.title.string.strip()
+        return str(soup.title.string.strip())
     h1 = soup.find(["h1", "h2"]) if soup else None
     if h1 and h1.get_text(strip=True):
-        return h1.get_text(strip=True)
+        return str(h1.get_text(strip=True))
     return None
 
 
@@ -46,10 +46,12 @@ def _get_dates(soup: BeautifulSoup) -> tuple[Optional[str], Optional[str]]:
     pub = None
     updated = None
     for tag in soup.find_all(["time", "meta", "span", "p"]):
+        if not isinstance(tag, Tag):
+            continue
         text = (
             tag.get("datetime") or tag.get("content") or tag.get_text(" ", strip=True)
         )
-        if not text:
+        if not text or not isinstance(text, str):
             continue
         d = parse_date(text)
         if d:
@@ -106,7 +108,9 @@ def _extract_sections(soup: BeautifulSoup) -> List[GuidelineSection]:
     return sections
 
 
-def _level_from_tag(tag: str) -> int:
+def _level_from_tag(tag: Optional[str]) -> int:
+    if not tag:
+        return 1
     try:
         return int(tag[1]) if tag.startswith("h") and tag[1].isdigit() else 1
     except Exception:
